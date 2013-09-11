@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <style>
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <title>imageMaps | Responsive image maps to all browsers</title>
+</head>
+<body>
+    <map name="uniqueimagemapname">
+        <area href="/" shape="poly" coords="125.9,377.6,311.03,259.13,488.8,377.6,488.8,658.9,125.9,658.9" title="Poly">
+        <area href="/" shape="circle" coords="733.2,681.1,170.3" title="Arc">
+        <area href="/" shape="rect" coords="955.3,199.9,1266.35,384.9" title="Rect">
+    </map>
+    <img src="imagemap.png" usemap="#uniqueimagemapname" />
+
+    <script src="imagemaps.js"></script>
+    <script>
+        var imgs = document.querySelectorAll('img[usemap]');
+        for (var i = 0, img; (img = imgs[i]); i++) {
+            imageMaps(img);
+        }
+    </script>
+</body>
+</html>
