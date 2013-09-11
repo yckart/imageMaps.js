@@ -1,0 +1,28 @@
+{
+    "name": "imagemaps",
+    "title": "imageMaps",
+    "description": "Responsive image maps to all browsers",
+    "keywords": [
+        "ui",
+        "css",
+        "html",
+        "image",
+        "responsive",
+        "imagemap",
+        "usemap"
+    ],
+    "version": "0.0.1",
+    "author": {
+        "name": "Yannick Albert",
+        "email": "mail@yckart.com",
+        "url": "https://github.com/yckart"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://yckart.com/mit/"
+    }],
+    "homepage": "http://yckart.github.io/imageMaps.js",
+    "demo": "http://yckart.github.io/imageMaps.js",
+    "docs": "https://github.com/yckart/imageMaps.js",
+    "bugs": "https://github.com/yckart/imageMaps.js/issues"
+}
