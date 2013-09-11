@@ -1,4 +1,24 @@
-#No documentation yet!
+#No *full* documentation yet!
+
+#Usage
+
+##Vanilla
+    <map name="beachmap">
+        <area href="/" shape="poly" coords="17,51,42,35,66,51,66,89,17,89" title="Beach hut - where you get changed" />
+        <area shape="circle" coords="99,92,12" />
+        <area href="/" shape="circle" coords="99,92,23" title="Life ring - to help you swim" />
+        <area href="/" shape="rect" coords="129,27,171,52" title="Flag - says if it safe to swim" />
+    </map>
+    <img src="http://www.howtocreate.co.uk/tutorials/jsexamples/imagemap.png" usemap="#beachmap" />
+
+    var imgs = document.querySelectorAll('img[usemap]');
+    for (var i = 0, img; (img = imgs[i]); i++) {
+        imageMaps(img);
+    }
+
+##jQuery
+
+    $('img[usemap]').imageMaps();
 
 #Support
 

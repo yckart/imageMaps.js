@@ -7,51 +7,54 @@
  * 2013/09/11
  **/
 
-var imageMaps = function (imgs) {
+(function ($) {
 
-    var resize = function () {
-        for (var i = 0, img; (img = imgs[i]); i++) {
+    this.imageMaps = function (img) {
+
+        var resize = function () {
 
             var usemap = img.getAttribute('usemap');
-            if (!usemap) continue;
+            if (!usemap) return;
 
             var map = usemap.slice(1);
             var areas = document.querySelector('map[name=' + map + ']').getElementsByTagName('area');
 
             var tmp = new Image();
-            tmp.onload = (function (i) {
-                return function () {
-                    this.onload = null;
-                    img = imgs[i];
+            tmp.onload = function () {
+                this.onload = null;
 
-                    var w = img.getAttribute('width') || this.width;
-                    var h = img.getAttribute('height') || this.height;
+                var w = img.getAttribute('width') || this.width;
+                var h = img.getAttribute('height') || this.height;
 
-                    var wPercent = img.clientWidth / 100;
-                    var hPercent = img.clientHeight / 100;
+                var wPercent = img.clientWidth / 100;
+                var hPercent = img.clientHeight / 100;
 
-                    for (var a = 0, area; (area = areas[a++]);) {
+                for (var a = 0, area; (area = areas[a++]);) {
 
-                        if (!area.coord) area.coord = area.getAttribute('coords');
+                    if (!area.coord) area.coord = area.getAttribute('coords');
 
-                        var coords = area.coord.split(','),
-                            c = coords.length,
-                            coordsPercent = [];
+                    var coords = area.coord.split(','),
+                        c = coords.length,
+                        coordsPercent = [];
 
-                        while (c--) {
-                            coordsPercent[c] = !(c % 2) ?
-                                ((coords[c] / w) * 100) * wPercent :
-                                ((coords[c] / h) * 100) * hPercent;
-                        }
-                        area.setAttribute('coords', coordsPercent.join());
+                    while (c--) {
+                        coordsPercent[c] = !(c % 2) ? ((coords[c] / w) * 100) * wPercent : ((coords[c] / h) * 100) * hPercent;
                     }
-                };
-            }(i));
+                    area.setAttribute('coords', coordsPercent.join());
+                }
+            };
             tmp.setAttribute('src', img.getAttribute('src'));
-        }
+        };
+
+        resize();
+        if (window.addEventListener) return window.addEventListener('resize', resize);
+        if (window.attachEvent) return window.attachEvent('onresize', resize);
     };
 
-    resize();
-    if (window.addEventListener) return window.addEventListener('resize', resize, false);
-    if (window.attachEvent) return window.attachEvent('onresize', resize);
-};
+    if ($) $.fn.imageMaps = function () {
+        return this.each(function () {
+            imageMaps(this);
+        });
+    };
+
+}(this.jQuery || this.Zepto));
